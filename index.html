@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head class="container">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>MoDOT</title>
+    
+    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet"> -->
+
+</head>
+
+<body class="blue lighten-3" style="margin:0; height:100%;" >
+    <nav class="z-depth-0 white lighten-4">
+      <div class="nav-wrapper container " >
+        <a href="#" class="brand-logo">
+          <img src="img/Picture1.png" style="width: 180px; margin-top: 5px;">
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <!-- start of maintenance history tab--> 
+          <li class="logged-in" style="display: none;">
+            <a href="page2.html" class="grey-text modal-trigger" style="font-size: larger">Maintenance History</a>
+          </li>
+          <!-- end of maintenance history tab. i've deleted data-target="modal-account" -->
+            <li class="logged-in" style="display: none;">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-account" style="font-size: larger">Account</a>
+            </li>
+            <li class="logged-in" style="display: none; ">
+              <a href="#" class="grey-text" id="logout"style="font-size: larger">Logout</a>
+            </li>
+            <li class="admin" style="display: none; ">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-create"style="font-size: larger">Add</a>
+            </li>
+            <li class="logged-out" style="display: none; ">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-login"style="font-size: larger">Login</a>
+            </li>
+            <li class="logged-out" style="display: none; ">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-signup"style="font-size: larger">Sign up</a>
+            </li>
+          </span>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ADMIN ACTIONS -->
+  <form class="center-align admin-actions admin" style="margin: 50px auto; max-width: 350px; background-color: white; display: none; border-radius: 25px;
+  border: 2px solid rgb(1, 119, 187);
+  padding: 20px;
+  width: 360px;
+  height: 150px;">
+  <label for="admin-email" style="font-size:medium; color: rgb(1, 119, 187);"> Add New Admin</label>
+    <input type="email" placeholder="User email" id="admin-email" required />
+    <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
+  </form>
+
+    <!-- SIGN UP MODAL -->
+  <div id="modal-signup" class="modal">
+        <div class="modal-content">
+          <h4>Sign up</h4><br/>
+          <form id="signup-form">
+            <div class="input-field">
+              <input type="email" id="signup-email" required />
+              <label for="signup-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="signup-password" required />
+              <label for="signup-password">Choose password</label>
+            </div>
+            <div class="input-field">
+              <input type="text" id="signup-bio" required />
+              <label for="signup-bio">Name</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+            <p class="error blue-text center-align"></p>
+          </form>
+        </div>
+      </div>
+    
+      <!-- LOGIN MODAL -->
+      <div id="modal-login" class="modal">
+        <div class="modal-content">
+          <h4>Login</h4><br />
+          <form id="login-form">
+            <div class="input-field">
+              <input type="email" id="login-email" required />
+              <label for="login-email">Email address</label>
+            </div>
+            <div class="input-field">
+              <input type="password" id="login-password" required />
+              <label for="login-password">Your password</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Login</button>
+            <p class="error blue-text center-align"></p>
+          </form>
+        </div>
+      </div>
+    
+      <!-- ACCOUNT MODAL -->
+      <div id="modal-account" class="modal">
+        <div class="modal-content center-align">
+          <h4>Account details</h4><br />
+          <div class="account-details"></div>
+          <div class="account-extras"></div>
+        </div>
+      </div>
+    
+      <!-- ADD MODAL -->
+      <div id="modal-create" class="modal">
+        <div class="modal-content">
+          <h4>Add Data</h4><br />
+          <form id="create-form">
+            <div class="input-field">
+              <input type="text" id="name" required>
+              <label for="name">Name - Software</label>
+            </div>
+            <div class="input-field">
+              <textarea id="tag_num" class="materialize-textarea" required></textarea>
+              <label for="tag_num">Tag Number</label>
+            </div>
+            <div class="input-field">
+              <textarea id="license_key" class="materialize-textarea" required></textarea>
+              <label for="license_key">License Key</label>
+            </div>
+            <div class="input-field">
+              <textarea id="exp_date" placeholder="MM/DD/YYYY" class="materialize-textarea" required></textarea>
+              <label for="exp_date">Expiration Date</label>
+            </div>
+            
+            
+            <!-- <div class="input-field">
+              <input style="color: rgb(143, 143, 143);" id="exp_date" type="date" required> 
+              <label for="exp_date">Expiration Date</label>
+            </div> -->
+            
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
+          </form>
+        </div>
+      </div>
+    
+  
+
+      <!-- LIST -->
+      <div class="container" style="margin-top: 70px;"> 
+        <ul class="collapsible z-depth-5 guides" style="border: none;">
+        </ul>
+      </div>
+
+      <div class="container" style="margin-top: 40px;">
+          <ul class="collapsible z-depth-0 guides" style="border: none;">
+            <li>
+              <div class="collapsible-header grey lighten-4">Title</div>
+              <div class="collapsible-body white">
+                <table>
+                  <tr>
+                      <th>Software</th>
+                      <th>License Key</th>
+                      <th>Tag Number</th>
+                      <th>Expiration Date</th>                 
+                    </tr>
+                  </table>
+              </div>
+            </li>
+            </ul>
+            </div>
+      
+      
+
+    
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-functions.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  
+  var firebaseConfig = {
+    apiKey: "AIzaSyAvpIRiYJ7lTi-chQBpUPT1cl6gc_vQCpw",
+    authDomain: "m-software-a1cae.firebaseapp.com",
+    databaseURL: "https://m-software-a1cae.firebaseio.com",
+    projectId: "m-software-a1cae",
+    storageBucket: "m-software-a1cae.appspot.com",
+    messagingSenderId: "288638309606",
+    appId: "1:288638309606:web:0a70e0423746a169e49727",
+    measurementId: "G-6WDZSF92GP"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const functions = firebase.functions();
+  
+</script>
+</script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script src="scripts/auth.js"></script>
+      <script src="scripts/index.js"></script>
+
+  <footer style="text-align: center;color:white;margin-top:130px;">
+    <H3>Data Management App</h3>
+      <p>By G2 Solutions</p>
+  </footer>
+</body>
+</html>

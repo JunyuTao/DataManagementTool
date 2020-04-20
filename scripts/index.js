@@ -93,9 +93,9 @@ const setupGuides = (user, data) => {
     //guideList.innerHTML = ;
     guideLists.innerHTML = '<h3 class="center-align" style="color:white; margin:90px;">Login to view data</h3>';
   }
-
-
 };
+
+
 
 
 const setupMaintenance = (user, data) => {
@@ -146,8 +146,8 @@ const setupMaintenance = (user, data) => {
     });
     guideList.innerHTML = html;
   } else {
-    //guideList.innerHTML = ;
-    guideLists.innerHTML = '<h3 class="center-align" style="color:white; margin:90px;">Login to view data</h3>';
+    //guideList.innerHTML = '';
+    guideList.innerHTML = '<h3 class="center-align" style="color:white; margin:90px;">Login to view data</h3>';
   }
 }
 

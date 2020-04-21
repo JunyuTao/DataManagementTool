@@ -19,13 +19,16 @@ auth.onAuthStateChanged(user => {
       user.admin = idTokenResult.claims.admin;
       setupUI(user);
     });
+    if(document.getElementById("guidess") ) {
     db.collection('guides').onSnapshot(snapshot => {
       setupGuides(user, snapshot.docs);
     }, err => console.log(err.message));
-
+    }
+    else{
     db.collection('maintenance').onSnapshot(snapshot => {
       setupMaintenance(user, snapshot.docs);
     }, err => console.log(err.message));
+    }
   } else {
     setupUI();
     setupGuides(false, []);
@@ -39,7 +42,7 @@ createForm.addEventListener('submit', (e) => {
   e.preventDefault();
   console.log(createForm)
 
-  if (createForm.tag_num) {
+  if (createForm.owner) {
     let formData = {
       tag_num: createForm.tag_num.value,
       owner: createForm.owner.value,

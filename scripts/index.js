@@ -115,7 +115,7 @@ const setupGuides = (user, data) => {
     //guideList.innerHTML = html;
   } else {
     //guideList.innerHTML = ;
-    guideLists.innerHTML = '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
+    guideLists.innerHTML = '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;border: 2px solid white;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
   }
 };
 
@@ -173,7 +173,7 @@ const setupMaintenance = (user, data) => {
     guideList.innerHTML = tableHtml;
   } else {
     //guideList.innerHTML = '';
-    guideLists.innerHTML = '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
+    guideLists.innerHTML = '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;border: 2px solid white;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
   }
 }
 

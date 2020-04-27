@@ -24,9 +24,9 @@ const setupUI = (user) => {
     // account info
     db.collection('users').doc(user.uid).get().then(doc => {
       const html = `
-        <div>Logged in as ${user.email}</div>
-        <div>${doc.data().bio}</div>
-        <div class="blue-text">${user.admin ? 'Admin' : ''}</div>
+        <div style="font-size:medium;">Logged In as: ${user.email}</div>
+        <div style="padding:20px; font-size:large;" >${doc.data().Fname} ${doc.data().Lname}</div>
+        <div class="blue-text;" style="font-size:large;color: rgb(103, 187, 235);padding:1px;">${user.admin ? 'Admin' : ''}</div>
       `;
       accountDetails.innerHTML = html;
     });
@@ -98,6 +98,7 @@ const setupGuides = (user, data) => {
             <th>License Key</th>
             <th>Version</th>
             <th>Tag#</th>
+            <th>APR</th>
             <th>Expiration Date</th>
             <th></th>
           </tr>
@@ -199,7 +200,7 @@ const getTable = (isAdmin, rows) => {
            <td>${row.version}</td>
            <td>${row.tag_num}</td>
            <td>${row.apr}</td>
-           <td>${row.exp_date}</td>
+           <td >${row.exp_date}</td>
            ${showDelete(row, isAdmin)}
           </tr>`
 
@@ -451,8 +452,8 @@ const setupSoftware = (user, data) => {
               });
               addAPR.innerHTML = html;
               } else {
-              guideLists.innerHTML = '';
-              }
+                guideLists.innerHTML = '';
+                }
               }
 
 
@@ -474,7 +475,9 @@ const setupSoftware = (user, data) => {
                 }
                 });
                 addOwner.innerHTML = htmll;
-                } 
+                } else {
+                  guideLists.innerHTML = '';
+                  }
                 }
 
                 const setupLV = (user, data) => {
@@ -494,7 +497,9 @@ const setupSoftware = (user, data) => {
                   }
                   });
                   addLV.innerHTML = html;
-                  }
+                  }else {
+                    guideLists.innerHTML = '';
+                    }
                   }
 
                   const setupRM = (user, data) => {
@@ -514,5 +519,7 @@ const setupSoftware = (user, data) => {
                     }
                     });
                     addRM.innerHTML = html;
-                    }
+                    }else {
+                      guideLists.innerHTML = '';
+                      }
                     }

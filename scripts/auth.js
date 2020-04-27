@@ -57,7 +57,6 @@ auth.onAuthStateChanged(user => {
     db.collection('maintenance').onSnapshot(snapshot => {
       setupMaintenance(user, snapshot.docs);
     }, err => console.log(err.message));
-    }
 
     db.collection('guides').onSnapshot(snapshot => {
       setupTag(user, snapshot.docs);
@@ -74,6 +73,7 @@ auth.onAuthStateChanged(user => {
     db.collection('maintenance').onSnapshot(snapshot => {
       setupRM(user, snapshot.docs);
     }, err => console.log(err.message));
+  }
 
 
 
@@ -144,7 +144,8 @@ signupForm.addEventListener('submit', (e) => {
   // sign up the user & add firestore data
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
     return db.collection('users').doc(cred.user.uid).set({
-      bio: signupForm['signup-bio'].value
+      Fname: signupForm['Fname'].value,
+      Lname: signupForm['Lname'].value,
     });
   }).then(() => {
     // close the signup modal & reset form
@@ -183,6 +184,7 @@ loginForm.addEventListener('submit', (e) => {
 
   // log the user in
   auth.signInWithEmailAndPassword(email, password).then((cred) => {
+    
     // close the signup modal & reset form
     const modal = document.querySelector('#modal-login');
     M.Modal.getInstance(modal).close();

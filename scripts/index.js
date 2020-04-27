@@ -100,6 +100,7 @@ const setupGuides = (user, data) => {
             <th>Tag#</th>
             <th>APR</th>
             <th>Expiration Date</th>
+            <th>Comment</th>
             <th></th>
           </tr>
           </thead>
@@ -201,6 +202,7 @@ const getTable = (isAdmin, rows) => {
            <td>${row.tag_num}</td>
            <td>${row.apr}</td>
            <td >${row.exp_date}</td>
+           <td style="table-layout: auto;width: 25%;" >${row.comment}</td>
            ${showDelete(row, isAdmin)}
           </tr>`
 

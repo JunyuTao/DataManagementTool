@@ -218,7 +218,7 @@ const mgetTable = (isAdmin, rows) => {
     <td>${row.tag_num}</td>
     <td>${row.repairman}</td>
     <td>${row.laptop_v}</td>
-    <td>${row.problem}</td>
+    <td style="table-layout: auto;width: 20%;" >${row.problem}</td>
     <td>${row.date_in}</td>
     <td>${row.date_out}</td>
     ${mhowDelete(row, isAdmin)}

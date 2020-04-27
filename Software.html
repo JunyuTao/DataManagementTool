@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
   <title>MoDOT</title>
 
@@ -135,22 +136,56 @@
     <div class="modal-content">
       <h4>Add Data</h4><br />
       <form id="create-form">
-        <div class="input-field">
-          <input type="text" id="name" required>
-          <label for="name">Name</label>
+
+        <div class="select">
+          <label for="fname">First Name</label>
+          <input list="fname" id="first" >
+            <datalist id="fname" class="fname" >
+            </datalist>    
         </div>
-        <div class="input-field">
-          <textarea id="tag_num" class="materialize-textarea" required></textarea>
+
+        <div class="select">
+          <label for="lname">Last Name</label>
+          <input list="lname" id="last" >
+            <datalist id="lname" class="lname" >
+            </datalist>    
+        </div>
+
+        <div class="select">
           <label for="tag_num">Tag Number</label>
+          <input list="tag_num" id="tag" >
+            <datalist id="tag_num" class="tag_num" >
+            </datalist>    
         </div>
-        <div class="input-field">
-          <textarea id="software" class="materialize-textarea" required></textarea>
+
+        <div class="select">
           <label for="software">Software</label>
+          <input list="software" id="sw"  >
+            <datalist id="software" class="software" >
+            </datalist>    
         </div>
-        <div class="input-field">
-          <textarea id="license_key" class="materialize-textarea" required></textarea>
+
+        <div class="select">
           <label for="license_key">License Key</label>
+          <input list="license_key"  id="lk" >
+            <datalist id="license_key" class="license_key" >
+            </datalist>    
         </div>
+
+        <div class="select">
+          <label for="version">Version</label>
+          <input list="version" id="vs"  >
+            <datalist id="version" class="version" >
+            </datalist>    
+        </div>
+
+        <div class="select">
+          <label for="apr">APR</label>
+          <input list="apr" id="a"  >
+            <datalist id="apr" class="apr" >
+            </datalist>    
+        </div>
+
         <div class="input-field">
           <input style="color: rgb(143, 143, 143);" id="exp_date" type="date" required>
           <label for="exp_date">Expiration Date</label>
@@ -213,6 +248,7 @@
   <footer style="text-align: center;color:white;margin-top:130px;">
     <H3>Data Management App</h3>
     <p>By G2 Solutions</p>
+    <img src="img/Picturelogo.png" style="width: 10%; height: 10%;" >
   </footer>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

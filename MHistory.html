@@ -134,30 +134,44 @@
     <div class="modal-content">
       <h4>Add History</h4><br />
       <form id="create-form">
-        <div class="input-field">
-          <input type="text" id="tag_num" required>
-          <label for="tag_num">Asset Number</label>
+        <div class="select">
+          <label for="tagnum">Tag Number</label>
+          <input list="tag_num" id="tag" >
+            <datalist id="tag_num" class="tag_num" >
+            </datalist>    
         </div>
-        <div class="input-field">
-            <textarea id="owner" class="materialize-textarea" required></textarea>
-            <label for="owner">Owner of the laptop</label>
-            </div>
-        <div class="input-field">
-          <textarea id="laptop_v" class="materialize-textarea" required></textarea>
-          <label for="laptop_v">Laptop Version</label>
+
+        <div class="select">
+          <label for="owner">Owner</label>
+          <input list="owner" id="own" >
+            <datalist id="owner" class="owner" >
+            </datalist>    
         </div>
+
+        <div class="select">
+            <label for="laptop_v">Laptop Version</label>
+            <input list="laptop_v" id="lv" >
+              <datalist id="laptop_v" class="laptop_v" >
+              </datalist>    
+        </div>
+
         <div class="input-field">
           <textarea id="problem" class="materialize-textarea" required></textarea>
           <label for="problem">Problem</label>
         </div>
-        <div class="input-field">
-          <textarea id="repairman" class="materialize-textarea" required></textarea>
-          <label for="repairman">Repairman</label>
+
+        <div class="select">
+            <label for="repairman">Repairman</label>
+            <input list="repairman" id="rm" >
+              <datalist id="repairman" class="repairman" >
+              </datalist>    
         </div>
+
         <div class="input-field">
           <input style="color: rgb(143, 143, 143);" id="date_in" type="date" required>
           <label for="date_in">Date In</label>
         </div>
+
         <div class="input-field">
             <input style="color: rgb(143, 143, 143);" id="date_out" type="date" required>
             <label for="date_out">Date Out</label>

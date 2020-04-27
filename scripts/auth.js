@@ -23,12 +23,60 @@ auth.onAuthStateChanged(user => {
     db.collection('guides').onSnapshot(snapshot => {
       setupGuides(user, snapshot.docs);
     }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupSoftware(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupFname(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupLname(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupTag(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupLi(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupVS(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupAPR(user, snapshot.docs);
+    }, err => console.log(err.message));
+
     }
     else{
     db.collection('maintenance').onSnapshot(snapshot => {
       setupMaintenance(user, snapshot.docs);
     }, err => console.log(err.message));
     }
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupTag(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('guides').onSnapshot(snapshot => {
+      setupname(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('maintenance').onSnapshot(snapshot => {
+      setupLV(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+    db.collection('maintenance').onSnapshot(snapshot => {
+      setupRM(user, snapshot.docs);
+    }, err => console.log(err.message));
+
+
+
   } else {
     setupUI();
     setupGuides(false, []);
@@ -42,12 +90,12 @@ createForm.addEventListener('submit', (e) => {
   e.preventDefault();
   console.log(createForm)
 
-  if (createForm.owner) {
+  if (createForm.own) {
     let formData = {
-      tag_num: createForm.tag_num.value,
-      owner: createForm.owner.value,
-      laptop_v: createForm.laptop_v.value,
-      repairman : createForm.repairman.value,
+      tag_num: createForm.tag.value,
+      owner: createForm.own.value,
+      laptop_v: createForm.lv.value,
+      repairman : createForm.rm.value,
       problem: createForm.problem.value,
       date_in: createForm.date_in.value,
       date_out: createForm.date_out.value,
@@ -63,10 +111,14 @@ createForm.addEventListener('submit', (e) => {
     });
   } else {
     let formData = {
-      name: createForm.name.value,
-      software: createForm.software.value,
-      tag_num: createForm.tag_num.value,
-      license_key: createForm.license_key.value,
+      
+      fname: createForm.first.value,
+      lname: createForm.last.value,
+      software: createForm.sw.value,
+      tag_num: createForm.tag.value,
+      license_key: createForm.lk.value,
+      version: createForm.vs.value,
+      apr: createForm.a.value,
       exp_date: createForm.exp_date.value,
     }
     db.collection('guides').add(formData).then(() => {

@@ -1,64 +1,71 @@
 // DOM elements
-const guideList = document.querySelector('.guides');
-const guideLists = document.querySelector('.guidess');
-const loggedOutLinks = document.querySelectorAll('.logged-out');
-const loggedInLinks = document.querySelectorAll('.logged-in');
-const accountDetails = document.querySelector('.account-details');
-const adminItems = document.querySelectorAll('.admin');
-const addSoftware = document.querySelector('.software');
-const addFname = document.querySelector('.fname');
-const addLname = document.querySelector('.lname');
-const addTag = document.querySelector('.tag_num');
-const addLi = document.querySelector('.license_key');
-const addVS = document.querySelector('.version');
-const addAPR = document.querySelector('.apr');
-const addOwner = document.querySelector('.owner');
-const addLV = document.querySelector('.laptop_v');
-const addRM = document.querySelector('.repairman');
+const guideList = document.querySelector(".guides");
+const guideLists = document.querySelector(".guidess");
+const loggedOutLinks = document.querySelectorAll(".logged-out");
+const loggedInLinks = document.querySelectorAll(".logged-in");
+const accountDetails = document.querySelector(".account-details");
+const adminItems = document.querySelectorAll(".admin");
+const addSoftware = document.querySelector(".software");
+const addFname = document.querySelector(".fname");
+const addLname = document.querySelector(".lname");
+const addTag = document.querySelector(".tag_num");
+const addLi = document.querySelector(".license_key");
+const addVS = document.querySelector(".version");
+const addAPR = document.querySelector(".apr");
+const addOwner = document.querySelector(".owner");
+const addLV = document.querySelector(".laptop_v");
+const addRM = document.querySelector(".repairman");
 
 const setupUI = (user) => {
   if (user) {
     if (user.admin) {
-      adminItems.forEach(item => item.style.display = 'block');
+      adminItems.forEach((item) => (item.style.display = "block"));
     }
     // account info
-    db.collection('users').doc(user.uid).get().then(doc => {
-      const html = `
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        const html = `
         <div style="font-size:medium;">Logged In as: ${user.email}</div>
-        <div style="padding:20px; font-size:large;" >${doc.data().Fname} ${doc.data().Lname}</div>
-        <div class="blue-text;" style="font-size:large;color: rgb(103, 187, 235);padding:1px;">${user.admin ? 'Admin' : ''}</div>
+        <div style="padding:20px; font-size:large;" >${doc.data().Fname} ${
+          doc.data().Lname
+        }</div>
+        <div class="blue-text;" style="font-size:large;color: rgb(103, 187, 235);padding:1px;">${
+          user.admin ? "Admin" : ""
+        }</div>
       `;
-      accountDetails.innerHTML = html;
-    });
+        accountDetails.innerHTML = html;
+      });
     // toggle user UI elements
-    loggedInLinks.forEach(item => item.style.display = 'block');
-    loggedOutLinks.forEach(item => item.style.display = 'none');
+    loggedInLinks.forEach((item) => (item.style.display = "block"));
+    loggedOutLinks.forEach((item) => (item.style.display = "none"));
   } else {
-    adminItems.forEach(item => item.style.display = 'none');
+    adminItems.forEach((item) => (item.style.display = "none"));
     // clear account info
-    accountDetails.innerHTML = '';
+    accountDetails.innerHTML = "";
     // toggle user elements
-    adminItems.forEach(item => item.style.display = 'none');
-    loggedInLinks.forEach(item => item.style.display = 'none');
-    loggedOutLinks.forEach(item => item.style.display = 'block');
+    adminItems.forEach((item) => (item.style.display = "none"));
+    loggedInLinks.forEach((item) => (item.style.display = "none"));
+    loggedOutLinks.forEach((item) => (item.style.display = "block"));
   }
 };
 
 // setup data
 const setupGuides = (user, data) => {
-  console.log(data)
+  console.log(data);
   if (data.length) {
-    let html = '';
+    let html = "";
     var dataArray = [];
     var expiringTitles = [];
-    data.forEach(doc => {
+    data.forEach((doc) => {
       const guide = { id: doc.id, ...doc.data() };
-      let exprdate = guide.exp_date.split('-');
-      let formdate = new Date(+exprdate[0], (+exprdate[1] - 1), +exprdate[2])
+      let exprdate = guide.exp_date.split("-");
+      let formdate = new Date(+exprdate[0], +exprdate[1] - 1, +exprdate[2]);
       if (numDaysBetween(formdate, new Date()) < 90) {
         expiringTitles.push(guide.software);
       }
-      dataArray.push(guide)
+      dataArray.push(guide);
       const li = `
         // <li>
         //   <div class="collapsible-header grey lighten-4"> ${guide.software} </div>  
@@ -70,26 +77,30 @@ const setupGuides = (user, data) => {
       html += li;
     });
 
-    
     var groupedGuides = _.groupBy(dataArray, (guide) => {
       return guide.software;
     });
 
-    
-    let guidenNames = Object.keys(groupedGuides)
-    let tableHtml = ''
-    guidenNames.forEach(software => {
-      let style =``
+    let guidenNames = Object.keys(groupedGuides);
+    let tableHtml = "";
+    guidenNames.forEach((software) => {
+      let style = ``;
 
-      if(expiringTitles.includes(software)){
-        style=`style= "background: red !important; color:white;"`
+      if (expiringTitles.includes(software)) {
+        style = `style= "background: red !important; color:white;"`;
       }
       const li = `
       <li>
       <div ${style} class="collapsible-header grey lighten-4">${software}</div>
       <div class="collapsible-body white">
-        <table id="${software.replace(/ /g, '')}">
-        <input type="text" id="search${software.replace(/ /g, '')}" onkeyup="search(${software.replace(/ /g, '')})" placeholder="Search" title="Type in a name">
+        <table id="${software.replace(/ /g, "")}">
+        <input type="text" id="search${software.replace(
+          / /g,
+          "",
+        )}" onkeyup="search(${software.replace(
+        / /g,
+        "",
+      )})" placeholder="Search" title="Type in a name">
      
         <thead>
           <tr>
@@ -117,31 +128,28 @@ const setupGuides = (user, data) => {
     //guideList.innerHTML = html;
   } else {
     //guideList.innerHTML = ;
-    guideLists.innerHTML = '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;border: 2px solid white;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
+    guideLists.innerHTML =
+      '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;border: 2px solid white;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
   }
 };
 
-
-
-
 const setupMaintenance = (user, data) => {
-  console.log(user)
-  console.log(data)
+  console.log(user);
+  console.log(data);
   if (data.length) {
     var dataArray = [];
-    data.forEach(doc => {
+    data.forEach((doc) => {
       const guide = { id: doc.id, ...doc.data() };
-      dataArray.push(guide)
-
+      dataArray.push(guide);
     });
 
     var groupedMaintenance = _.groupBy(dataArray, (m) => {
       return m.tag_num;
     });
 
-    let maintenanceNames = Object.keys(groupedMaintenance)
-    let tableHtml = ''
-    maintenanceNames.forEach(maintenance => {
+    let maintenanceNames = Object.keys(groupedMaintenance);
+    let tableHtml = "";
+    maintenanceNames.forEach((maintenance) => {
       const li = `
         <li>
         <div class="collapsible-header grey lighten-4">${maintenance}</div>
@@ -175,9 +183,10 @@ const setupMaintenance = (user, data) => {
     guideList.innerHTML = tableHtml;
   } else {
     //guideList.innerHTML = '';
-    guideLists.innerHTML = '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;border: 2px solid white;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
+    guideLists.innerHTML =
+      '<div class="center-align" style="color:white; margin:90px; background-color:rgb(1, 119, 187);border-radius: 25px;border: 2px solid white;"><h3>Don’t have an account?</h3><p class="center-align" style="color:white; margin:90px;">If you are not a Missouri Department of Transportation employee you are not authorized to use this portal. Please contact your local Information Systems Department if you need additional help setting up an account.</p></div>';
   }
-}
+};
 
 const numDaysBetween = (d1, d2) => {
   let diff = Math.abs(d1.getTime() - d2.getTime());
@@ -185,14 +194,14 @@ const numDaysBetween = (d1, d2) => {
 };
 
 const getTable = (isAdmin, rows) => {
-  let rowHtml = ''
-  rows.forEach(row => {
+  let rowHtml = "";
+  rows.forEach((row) => {
     // write logic here to check expiration date
-    let style = ''
-    let exprdate = row.exp_date.split('-');
-    let formdate = new Date(+exprdate[0], (+exprdate[1] - 1), +exprdate[2])
+    let style = "";
+    let exprdate = row.exp_date.split("-");
+    let formdate = new Date(+exprdate[0], +exprdate[1] - 1, +exprdate[2]);
     if (numDaysBetween(formdate, new Date()) < 90) {
-      style = `style="background: red; color:white;"`
+      style = `style="background: red; color:white;"`;
     }
     let rHrml = `<tr ${style}>
            <td>${row.fname}</td>
@@ -204,18 +213,18 @@ const getTable = (isAdmin, rows) => {
            <td >${row.exp_date}</td>
            <td style="table-layout: auto;width: 25%;" >${row.comment}</td>
            ${showDelete(row, isAdmin)}
-          </tr>`
+           ${showEdit(row, isAdmin)}
+          </tr>`;
 
-    rowHtml += rHrml
-  })
-  return rowHtml
-
-}
+    rowHtml += rHrml;
+  });
+  return rowHtml;
+};
 
 const mgetTable = (isAdmin, rows) => {
-  console.log(rows)
-  let rowHtml = ''
-  rows.forEach(row => {
+  console.log(rows);
+  let rowHtml = "";
+  rows.forEach((row) => {
     let rHrml = `<tr>
     <td>${row.owner}</td>
     <td>${row.tag_num}</td>
@@ -225,39 +234,273 @@ const mgetTable = (isAdmin, rows) => {
     <td>${row.date_in}</td>
     <td>${row.date_out}</td>
     ${mhowDelete(row, isAdmin)}
-          </tr>`
+    ${mhowEdit(row, isAdmin)}
+          </tr>`;
 
-    rowHtml += rHrml
-  })
-  return rowHtml
-
-}
+    rowHtml += rHrml;
+  });
+  return rowHtml;
+};
 
 const showDelete = (row, isAdmin) => {
   if (isAdmin) {
-    return '<td> <button onclick=deleteRow(\'' + row.id + '\')>Delete</button></td>';
+    return (
+      "<td> <button onclick=deleteRow('" + row.id + "')>Delete</button></td>"
+    );
   } else {
-    return ``
+    return ``;
   }
-}
+};
+
+//============================================ EDIT HERE =================================== //
+//edit for software
+const showEdit = (row, isAdmin) => {
+  if (isAdmin) {
+    return `<td> <button onclick=deleteS("${row.id}") data-target="modal-editS" class="modal-trigger">Edit</button></td>`;
+  } else {
+    return ``;
+  }
+};
+
+//edit for maintenance
+const mhowEdit = (row, isAdmin) => {
+  if (isAdmin) {
+    return `<td> <button onclick=deleteM("${row.id}") class="modal-trigger" data-target="modal-edit">Edit</button></td>`;
+  } else {
+    return ``;
+  }
+};
+
+/////////////////////////////////////////////////////////////////////////////////////
+const editS = document.querySelector(".editSoftware");
+const deleteS = (id) => {
+  const k = db
+    .collection("guides")
+    .doc(id)
+    .get()
+    .then((doc) => {
+      editS.innerHTML = `
+  <div class="modal-content">
+  <h4>Edit Data</h4><br />
+  <form id="edit-form1">
+
+      <div class="select">
+          <label for="fname">First Name</label>
+          <input list="fname" id="first" value="${doc.data().fname}">
+          <datalist id="fname" class="fname">
+  </datalist>
+      </div>
+
+      <div class="select">
+          <label for="lname">Last Name</label>
+          <input list="lname" id="last" value="${doc.data().lname}">
+          <datalist id="lname" class="lname">
+  </datalist>
+      </div>
+
+      <div class="select">
+          <label for="tag_num">Tag Number</label>
+          <input list="tag_num" id="tag" value="${doc.data().tag_num}">
+          <datalist id="tag_num" class="tag_num">
+  </datalist>
+      </div>
+
+      <div class="select">
+          <label for="software">Software</label>
+          <input list="software" id="sw" value="${doc.data().software}">
+          <datalist id="software" class="software">
+  </datalist>
+      </div>
+
+      <div class="select">
+          <label for="license_key">License Key</label>
+          <input list="license_key" id="lk" value="${doc.data().license_key}">
+          <datalist id="license_key" class="license_key">
+  </datalist>
+      </div>
+
+      <div class="select">
+          <label for="version">Version</label>
+          <input list="version" id="vs" value="${doc.data().version}">
+          <datalist id="version" class="version">
+  </datalist>
+      </div>
+
+      <div class="select">
+          <label for="apr">APR</label>
+          <input list="apr" id="a" value="${doc.data().apr}">
+          <datalist id="apr" class="apr">
+  </datalist>
+      </div>
+
+      <div class="input-field">
+          <input style="color: rgb(143, 143, 143);" id="exp_date" type="date" value=${
+            doc.data().exp_date
+          } required>
+          <label for="exp_date">Expiration Date</label>
+      </div>
+
+      <div class="input-field">
+        <textarea id="comment" class="materialize-textarea">${
+          doc.data().comment
+        }</textarea>
+
+    </div>
+
+      <button class="btn yellow darken-2 z-depth-0">Edit</button>
+  </form>
+</div>
+`;
+
+      const editForm1 = document.querySelector("#edit-form1");
+
+      editForm1.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let formData = {
+          fname: editForm1.first.value,
+          lname: editForm1.last.value,
+          software: editForm1.sw.value,
+          tag_num: editForm1.tag.value,
+          license_key: editForm1.lk.value,
+          version: editForm1.vs.value,
+          apr: editForm1.a.value,
+          exp_date: editForm1.exp_date.value,
+          comment: editForm1.comment.value,
+        };
+
+        db.collection("guides")
+          .doc(id)
+          .update(formData)
+          .then(() => {
+            alert("Data Updated");
+            window.location = "Software.html";
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+const editM = document.querySelector(".editM");
+const deleteM = (id) => {
+  const m = db
+    .collection("maintenance")
+    .doc(id)
+    .get()
+    .then((doc) => {
+      editM.innerHTML = `<div class="modal-content">
+    <h4>Edit History</h4><br />
+    <form id="edit-form2">
+        <div class="select">
+            <label for="tagnum">Tag Number</label>
+            <input list="tag_num" id="tag" value="${doc.data().tag_num}">
+            <datalist id="tag_num" class="tag_num">
+    </datalist>
+        </div>
+  
+        <div class="select">
+            <label for="owner">Owner</label>
+            <input list="owner" id="own" value="${doc.data().owner}">
+            <datalist id="owner" class="owner">
+    </datalist>
+        </div>
+  
+        <div class="select">
+            <label for="laptop_v">Laptop Version</label>
+            <input list="laptop_v" id="lv" value="${doc.data().laptop_v}">
+            <datalist id="laptop_v" class="laptop_v">
+      </datalist>
+        </div>
+  
+        <div class="input-field">
+            <textarea id="problem" class="materialize-textarea" required>${
+              doc.data().problem
+            }</textarea>
+        </div>
+  
+        <div class="select">
+            <label for="repairman">Repairman</label>
+            <input list="repairman" id="rm" value="${doc.data().repairman}">
+            <datalist id="repairman" class="repairman">
+      </datalist>
+        </div>
+  
+        <div class="input-field">
+            <input style="color: rgb(143, 143, 143);" id="date_in" type="date" value=${
+              doc.data().date_in
+            } required>
+            <label for="date_in">Date In</label>
+        </div>
+  
+        <div class="input-field">
+            <input style="color: rgb(143, 143, 143);" id="date_out" type="date" value=${
+              doc.data().date_out
+            } required>
+            <label for="date_out">Date Out</label>
+        </div>
+  
+        <button class="btn yellow darken-2 z-depth-0">Edit</button>
+    </form>
+  </div>
+`;
+
+      const editForm2 = document.querySelector("#edit-form2");
+
+      editForm2.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let formData2 = {
+          tag_num: editForm2.tag.value,
+          owner: editForm2.own.value,
+          laptop_v: editForm2.lv.value,
+          repairman: editForm2.rm.value,
+          problem: editForm2.problem.value,
+          date_in: editForm2.date_in.value,
+          date_out: editForm2.date_out.value,
+        };
+
+        db.collection("maintenance")
+          .doc(id)
+          .update(formData2)
+          .then(() => {
+            alert("Data Updated");
+            window.location = "MHistory.html";
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 const mhowDelete = (row, isAdmin) => {
   if (isAdmin) {
-    return '<td> <button onclick=mdeleteRow(\'' + row.id + '\')>Delete</button></td>';
+    return (
+      "<td> <button onclick=deleteRow('" + row.id + "')>Delete</button></td>"
+    );
   } else {
-    return ``
+    return ``;
   }
-}
+};
+
 const mdeleteRow = (rowId) => {
-  db.collection('maintenance').doc(rowId).delete();
-}
+  db.collection("maintenance").doc(rowId).delete();
+};
 
 const deleteRow = (rowId) => {
-  db.collection('guides').doc(rowId).delete();
-}
+  db.collection("guides").doc(rowId).delete();
+};
 
 const search = (table) => {
-  console.log(table)
+  console.log(table);
   let input, filter, tr, td, i, txtValue;
   input = document.getElementById("search" + table.id);
   filter = input.value.toUpperCase();
@@ -265,7 +508,7 @@ const search = (table) => {
   for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
     if (td) {
-      console.log(td)
+      console.log(td);
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
@@ -274,7 +517,7 @@ const search = (table) => {
       }
     }
   }
-}
+};
 
 const msearch = () => {
   var input, filter, table, li, td, i, txtValue;
@@ -295,233 +538,230 @@ const msearch = () => {
       }
     }
   }
-}
+};
 
 // setup materialize components
-document.addEventListener('DOMContentLoaded', function () {
-
-  var modals = document.querySelectorAll('.modal');
+document.addEventListener("DOMContentLoaded", function () {
+  var modals = document.querySelectorAll(".modal");
   M.Modal.init(modals);
 
-  var items = document.querySelectorAll('.collapsible');
+  var items = document.querySelectorAll(".collapsible");
   M.Collapsible.init(items);
-
 });
 
 const setupSoftware = (user, data) => {
-  console.log(user)
-  console.log(data)
+  console.log(user);
+  console.log(data);
   if (data.length) {
-  let html = '';
-  var dataArray = [];
-  data.forEach(doc => {
-  const guidess = { id: doc.id, ...doc.data() };
-  if (!dataArray.includes(guidess.software)) {
-  dataArray.push(guidess.software)
-  const li = `
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const guidess = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(guidess.software)) {
+        dataArray.push(guidess.software);
+        const li = `
   <option value="${guidess.software}">
   `;
-  html += li;
+        html += li;
+      }
+    });
+    addSoftware.innerHTML = html;
   }
-  });
-  addSoftware.innerHTML = html;
-  } 
-  }
+};
 
-  const setupFname = (user, data) => {
-    console.log(user)
-    console.log(data)
-    if (data.length) {
-    let htmll = '';
+const setupFname = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let htmll = "";
     var dataArray = [];
-    data.forEach(doc => {
-    const guidesss = { id: doc.id, ...doc.data() };
-    if (!dataArray.includes(guidesss.fname)) {
-    dataArray.push(guidesss.fname)
-    const lii = `
+    data.forEach((doc) => {
+      const guidesss = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(guidesss.fname)) {
+        dataArray.push(guidesss.fname);
+        const lii = `
     <option value="${guidesss.fname}">
     `;
-    htmll += lii;
-    }
+        htmll += lii;
+      }
     });
     addFname.innerHTML = htmll;
-    } 
-    }
+  }
+};
 
-    const setupLname = (user, data) => {
-      console.log(user)
-      console.log(data)
-      if (data.length) {
-      let html = '';
-      var dataArray = [];
-      data.forEach(doc => {
+const setupLname = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
       const guidessss = { id: doc.id, ...doc.data() };
       if (!dataArray.includes(guidessss.lname)) {
-      dataArray.push(guidessss.lname)
-      const liii = `
+        dataArray.push(guidessss.lname);
+        const liii = `
       <option value="${guidessss.lname}">
       `;
-      html += liii;
+        html += liii;
       }
-      });
-      addLname.innerHTML = html;
-      } else {
-      guideLists.innerHTML = '';
-      }
-      }
+    });
+    addLname.innerHTML = html;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};
 
-      const setupTag = (user, data) => {
-        console.log(user)
-        console.log(data)
-        if (data.length) {
-        let html = '';
-        var dataArray = [];
-        data.forEach(doc => {
-        const guidessss = { id: doc.id, ...doc.data() };
-        if (!dataArray.includes(guidessss.tag_num)) {
-        dataArray.push(guidessss.tag_num)
+const setupTag = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const guidessss = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(guidessss.tag_num)) {
+        dataArray.push(guidessss.tag_num);
         const liii = `
         <option value="${guidessss.tag_num}">
         `;
         html += liii;
-        }
-        });
-        addTag.innerHTML = html;
-        } else {
-        guideLists.innerHTML = '';
-        }
-        }
+      }
+    });
+    addTag.innerHTML = html;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};
 
-        const setupLi = (user, data) => {
-          console.log(user)
-          console.log(data)
-          if (data.length) {
-          let html = '';
-          var dataArray = [];
-          data.forEach(doc => {
-          const guidessss = { id: doc.id, ...doc.data() };
-          if (!dataArray.includes(guidessss.license_key)) {
-          dataArray.push(guidessss.license_key)
-          const liii = `
+const setupLi = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const guidessss = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(guidessss.license_key)) {
+        dataArray.push(guidessss.license_key);
+        const liii = `
           <option value="${guidessss.license_key}">
           `;
-          html += liii;
-          }
-          });
-          addLi.innerHTML = html;
-          } else {
-          guideLists.innerHTML = '';
-          }
-          }
+        html += liii;
+      }
+    });
+    addLi.innerHTML = html;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};
 
-          const setupVS = (user, data) => {
-            console.log(user)
-            console.log(data)
-            if (data.length) {
-            let html = '';
-            var dataArray = [];
-            data.forEach(doc => {
-            const guidessss = { id: doc.id, ...doc.data() };
-            if (!dataArray.includes(guidessss.version)) {
-            dataArray.push(guidessss.version)
-            const liii = `
+const setupVS = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const guidessss = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(guidessss.version)) {
+        dataArray.push(guidessss.version);
+        const liii = `
             <option value="${guidessss.version}">
             `;
-            html += liii;
-            }
-            });
-            addVS.innerHTML = html;
-            } else {
-            guideLists.innerHTML = '';
-            }
-            }
+        html += liii;
+      }
+    });
+    addVS.innerHTML = html;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};
 
-            const setupAPR = (user, data) => {
-              console.log(user)
-              console.log(data)
-              if (data.length) {
-              let html = '';
-              var dataArray = [];
-              data.forEach(doc => {
-              const guidessss = { id: doc.id, ...doc.data() };
-              if (!dataArray.includes(guidessss.apr)) {
-              dataArray.push(guidessss.apr)
-              const liii = `
+const setupAPR = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const guidessss = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(guidessss.apr)) {
+        dataArray.push(guidessss.apr);
+        const liii = `
               <option value="${guidessss.apr}">
               `;
-              html += liii;
-              }
-              });
-              addAPR.innerHTML = html;
-              } else {
-                guideLists.innerHTML = '';
-                }
-              }
+        html += liii;
+      }
+    });
+    addAPR.innerHTML = html;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};
 
-
-              const setupname = (user, data) => {
-                console.log(user)
-                console.log(data)
-                if (data.length) {
-                let htmll = '';
-                var dataArray = [];
-                data.forEach(doc => {
-                const guidesss = { id: doc.id, ...doc.data() };
-                if (!dataArray.includes(guidesss.fname && guidesss.lname)) {
-                dataArray.push(guidesss.fname)
-                dataArray.push(guidesss.lname)
-                const lii = `
+const setupname = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let htmll = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const guidesss = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(guidesss.fname && guidesss.lname)) {
+        dataArray.push(guidesss.fname);
+        dataArray.push(guidesss.lname);
+        const lii = `
                 <option value="${guidesss.fname} ${guidesss.lname}">
                 `;
-                htmll += lii;
-                }
-                });
-                addOwner.innerHTML = htmll;
-                } else {
-                  guideLists.innerHTML = '';
-                  }
-                }
+        htmll += lii;
+      }
+    });
+    addOwner.innerHTML = htmll;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};
 
-                const setupLV = (user, data) => {
-                  console.log(user)
-                  console.log(data)
-                  if (data.length) {
-                  let html = '';
-                  var dataArray = [];
-                  data.forEach(doc => {
-                  const maintenance = { id: doc.id, ...doc.data() };
-                  if (!dataArray.includes(maintenance.laptop_v)) {
-                  dataArray.push(maintenance.laptop_v)
-                  const liii = `
+const setupLV = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const maintenance = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(maintenance.laptop_v)) {
+        dataArray.push(maintenance.laptop_v);
+        const liii = `
                   <option value="${maintenance.laptop_v}">
                   `;
-                  html += liii;
-                  }
-                  });
-                  addLV.innerHTML = html;
-                  }else {
-                    guideLists.innerHTML = '';
-                    }
-                  }
+        html += liii;
+      }
+    });
+    addLV.innerHTML = html;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};
 
-                  const setupRM = (user, data) => {
-                    console.log(user)
-                    console.log(data)
-                    if (data.length) {
-                    let html = '';
-                    var dataArray = [];
-                    data.forEach(doc => {
-                    const maintenance = { id: doc.id, ...doc.data() };
-                    if (!dataArray.includes(maintenance.repairman)) {
-                    dataArray.push(maintenance.repairman)
-                    const liii = `
+const setupRM = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    let html = "";
+    var dataArray = [];
+    data.forEach((doc) => {
+      const maintenance = { id: doc.id, ...doc.data() };
+      if (!dataArray.includes(maintenance.repairman)) {
+        dataArray.push(maintenance.repairman);
+        const liii = `
                     <option value="${maintenance.repairman}">
                     `;
-                    html += liii;
-                    }
-                    });
-                    addRM.innerHTML = html;
-                    }else {
-                      guideLists.innerHTML = '';
-                      }
-                    }
+        html += liii;
+      }
+    });
+    addRM.innerHTML = html;
+  } else {
+    guideLists.innerHTML = "";
+  }
+};

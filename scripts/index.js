@@ -110,8 +110,7 @@ const setupGuides = (user, data) => {
 
       const li = `
       <li>
-      <div ${style} class="collapsible-header grey lighten-4">${software}    <p class="adminStats" style="margin-left:auto;">${data}</p> </div>
-   
+      <div ${style} class="collapsible-header grey lighten-4"><div>${software}</div><div class="adminStats" style="margin-left:auto;">${data}</div> </div>
       <div class="collapsible-body white">
         <table id="${software.replace(/ /g, "")}">
         <input type="text" id="search${software.replace(

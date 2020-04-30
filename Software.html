@@ -27,25 +27,30 @@
 
             <ul class="right hide-on-med-and-down ">
                 <li class="logged-in" style="display: none;">
-                    <a href="MHistory.html" class="grey-text modal-trigger" style="font-size: larger">Maintenance History</a>
+                    <a href="MHistory.html" class="grey-text modal-trigger" style="font-size: larger">Maintenance
+                        History</a>
                 </li>
                 <li class="logged-in" style="display: none;">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-account" style="font-size: larger">Account</a>
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-account"
+                        style="font-size: larger">Account</a>
                 </li>
                 <li class="logged-in" style="display: none; ">
                     <a href="#" class="grey-text" id="logoutsidenav" style="font-size: larger">Logout</a>
                 </li>
                 <li class="admin" style="display: none; ">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add Software Package</a>
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add
+                        Software Package</a>
                 </li>
                 <li class="admin" style="display: none; ">
                     <a class="grey-text" id="downloadSoftware" style="font-size: larger">Download</a>
                 </li>
                 <li class="logged-out" style="display: none; ">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-login" style="font-size: larger">Login</a>
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-login"
+                        style="font-size: larger">Login</a>
                 </li>
                 <li class="logged-out" style="display: none; ">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-signup" style="font-size: larger">Sign up</a>
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-signup"
+                        style="font-size: larger">Sign up</a>
                 </li>
             </ul>
         </div>
@@ -57,13 +62,15 @@
             <a href="MHistory.html" class="grey-text modal-trigger" style="font-size: larger">Maintenance History</a>
         </li>
         <li class="logged-in" style="display: none;">
-            <a href="#" class="grey-text modal-trigger" data-target="modal-account" style="font-size: larger">Account</a>
+            <a href="#" class="grey-text modal-trigger" data-target="modal-account"
+                style="font-size: larger">Account</a>
         </li>
         <li class="logged-in" style="display: none;">
             <a class="grey-text" id="logout" style="font-size: larger">Logout</a>
         </li>
         <li class="admin" style="display: none; ">
-            <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add Software Package</a>
+            <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add
+                Software Package</a>
         </li>
         <li class="admin" style="display: none; ">
             <a class="grey-text" id="downloadSoftware" style="font-size: larger">Download</a>
@@ -144,67 +151,67 @@
     <!-- ADD MODAL -->
     <div id="modal-create" class="modal">
         <div class="modal-content">
-            <h4>Add Data</h4><br />
+            <h4>Software Package</h4><br />
             <form id="create-form">
 
                 <div class="select">
                     <label for="fname">First Name</label>
                     <input list="fname" id="first">
                     <datalist id="fname" class="fname">
-            </datalist>
+                    </datalist>
                 </div>
 
                 <div class="select">
                     <label for="lname">Last Name</label>
                     <input list="lname" id="last">
                     <datalist id="lname" class="lname">
-            </datalist>
+                    </datalist>
                 </div>
 
                 <div class="select">
                     <label for="tag_num">Tag Number</label>
                     <input list="tag_num" id="tag">
                     <datalist id="tag_num" class="tag_num">
-            </datalist>
+                    </datalist>
                 </div>
 
                 <div class="select">
-                    <label for="software">Software</label>
+                    <label for="software">Software(required)</label>
                     <input list="software" id="sw">
                     <datalist id="software" class="software">
-            </datalist>
+                    </datalist>
                 </div>
 
                 <div class="select">
-                    <label for="license_key">License Key</label>
+                    <label for="license_key">License Key(required)</label>
                     <input list="license_key" id="lk">
                     <datalist id="license_key" class="license_key">
-            </datalist>
+                    </datalist>
                 </div>
 
                 <div class="select">
-                    <label for="version">Version</label>
+                    <label for="version">Version(required)</label>
                     <input list="version" id="vs">
                     <datalist id="version" class="version">
-            </datalist>
+                    </datalist>
                 </div>
 
                 <div class="select">
-                    <label for="apr">APR</label>
+                    <label for="apr">APR(required)</label>
                     <input list="apr" id="a">
                     <datalist id="apr" class="apr">
-            </datalist>
+                    </datalist>
                 </div>
 
                 <div class="input-field">
-                    <input style="color: rgb(143, 143, 143);" id="exp_date" type="date" required>
-                    <label for="exp_date">Expiration Date</label>
+                    <input style="color: rgb(143, 143, 143);" id="exp_date" type="date">
+                    <label for="exp_date">Expiration Date(required)</label>
                 </div>
 
                 <div class="input-field">
-                  <textarea id="comment" class="materialize-textarea" required></textarea>
-                  <label for="comment">Comment</label>
-              </div>
+                    <textarea id="comment" class="materialize-textarea"></textarea>
+                    <label for="comment">Comment</label>
+                </div>
 
                 <button class="btn yellow darken-2 z-depth-0">Create</button>
             </form>
@@ -212,19 +219,19 @@
     </div>
 
 
-<!-- Edit Modal -->
-<div id="modal-account" class="modal">
-    <div class="modal-content center-align">
-        <h4>Account details</h4><br />
-        <div class="account-details"></div>
-        <div class="account-extras"></div>
+    <!-- Edit Modal -->
+    <div id="modal-account" class="modal">
+        <div class="modal-content center-align">
+            <h4>Account details</h4><br />
+            <div class="account-details"></div>
+            <div class="account-extras"></div>
+        </div>
     </div>
-</div>
 
-<!-- Edit MODAL -->
+    <!-- Edit MODAL -->
 
     <div id="modal-editS" class="modal editSoftware">
-       
+
     </div>
 
 
@@ -250,7 +257,7 @@
 
     <script>
         // Your web app's Firebase configuration
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.sidenav').sidenav();
         });
 

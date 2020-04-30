@@ -11,7 +11,7 @@ adminForm.addEventListener('submit', (e) => {
     });
 });
 console.log(auth.currentUser)
-    // listen for auth status changes
+// listen for auth status changes
 auth.onAuthStateChanged(user => {
     if (user) {
         user.getIdTokenResult().then(idTokenResult => {
@@ -88,6 +88,8 @@ createForm.addEventListener('submit', (e) => {
     e.preventDefault();
     console.log(createForm)
 
+
+
     if (createForm.own) {
         let formData = {
             tag_num: createForm.tag.value,
@@ -98,15 +100,20 @@ createForm.addEventListener('submit', (e) => {
             date_in: createForm.date_in.value,
             date_out: createForm.date_out.value,
         }
-        console.log(formData)
-        db.collection('maintenance').add(formData).then(() => {
-            // close the create modal & reset form
-            const modal = document.querySelector('#modal-create');
-            M.Modal.getInstance(modal).close();
-            createForm.reset();
-        }).catch(err => {
-            console.log(err.message);
-        });
+        if (!formData.tag_num || !formData.owner || !formData.laptop_v || !formData.repairman || !formData.problem || !formData.date_in || !formData.date_out) {
+            alert('Kindly Enter Fields First!');
+        }
+        else {
+            db.collection('maintenance').add(formData).then(() => {
+                // close the create modal & reset form
+                const modal = document.querySelector('#modal-create');
+                M.Modal.getInstance(modal).close();
+                createForm.reset();
+            }).catch(err => {
+                console.log(err.message);
+            });
+        }
+
     } else {
         let formData = {
 
@@ -120,14 +127,21 @@ createForm.addEventListener('submit', (e) => {
             exp_date: createForm.exp_date.value,
             comment: createForm.comment.value,
         }
-        db.collection('guides').add(formData).then(() => {
-            // close the create modal & reset form
-            const modal = document.querySelector('#modal-create');
-            M.Modal.getInstance(modal).close();
-            createForm.reset();
-        }).catch(err => {
-            console.log(err.message);
-        });
+
+        if (!formData.software || !formData.license_key || !formData.version || !formData.apr || !formData.exp_date) {
+            alert('Kindly Enter Fields First!');
+        } else {
+            db.collection('guides').add(formData).then(() => {
+                // close the create modal & reset form
+                const modal = document.querySelector('#modal-create');
+                M.Modal.getInstance(modal).close();
+                createForm.reset();
+            }).catch(err => {
+                console.log(err.message);
+            });
+        }
+
+
     }
 });
 

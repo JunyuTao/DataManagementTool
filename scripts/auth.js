@@ -173,7 +173,7 @@ createForm.addEventListener("submit", (e) => {
       exp_date: createForm.exp_date.value,
       comment: createForm.comment.value,
     };
-
+    
     if (
       !formData.software ||
       !formData.license_key ||
@@ -199,6 +199,7 @@ createForm.addEventListener("submit", (e) => {
           console.log(err.message);
         });
     }
+
   }
 });
 

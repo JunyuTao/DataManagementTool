@@ -670,7 +670,7 @@ const setupLi = (user, data) => {
     var dataArray = [];
     data.forEach((doc) => {
       const guidessss = { id: doc.id, ...doc.data() };
-      if (!dataArray.includes(guidessss.license_key)) {
+      if(!dataArray.includes(guidessss.license_key)) {
         dataArray.push(guidessss.license_key);
         const liii = `
           <option value="${guidessss.license_key}">

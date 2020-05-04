@@ -30,10 +30,10 @@ const setupUI = (user) => {
         <div style="font-size:medium;">Logged In as: ${user.email}</div>
         <div style="padding:20px; font-size:large;" >${doc.data().Fname} ${
           doc.data().Lname
-          }</div>
+        }</div>
         <div class="blue-text;" style="font-size:large;color: rgb(103, 187, 235);padding:1px;">${
           user.admin ? "Admin" : ""
-          }</div>
+        }</div>
       `;
         accountDetails.innerHTML = html;
       });
@@ -82,12 +82,9 @@ const setupGuides = (user, data) => {
       return guide.software;
     });
 
-
     let guidenNames = Object.keys(groupedGuides);
     let tableHtml = "";
     guidenNames.forEach((software) => {
-
-
       let counter = 0;
 
       for (let i = 0; i < groupedGuides[software].length; i++) {
@@ -102,10 +99,10 @@ const setupGuides = (user, data) => {
         style = `style= "background: red !important; color:white;"`;
       }
 
-      let data = ""
+      let data = "";
 
       if (user.admin) {
-        data = `${counter}/${groupedGuides[software].length}`
+        data = `${counter}/${groupedGuides[software].length}`;
       }
 
       const li = `
@@ -114,9 +111,9 @@ const setupGuides = (user, data) => {
       <div class="collapsible-body white">
         <table id="${software.replace(/ /g, "")}">
         <input type="text" id="search${software.replace(
-        / /g,
-        "",
-      )}" onkeyup="search(${software.replace(
+          / /g,
+          "",
+        )}" onkeyup="search(${software.replace(
         / /g,
         "",
       )})" placeholder="Search" title="Type in a name">
@@ -299,6 +296,8 @@ const deleteS = (id) => {
     .get()
     .then((doc) => {
       editS.innerHTML = `
+      <div class = "editMsg" ></div>
+
   <div class="modal-content">
   <h4>Edit Data</h4><br />
   <form id="edit-form1">
@@ -354,14 +353,14 @@ const deleteS = (id) => {
 
       <div class="input-field">
           <input style="color: rgb(143, 143, 143);" id="exp_date" type="date" value=${
-        doc.data().exp_date
-        } required>
+            doc.data().exp_date
+          } required>
           <label for="exp_date">Expiration Date</label>
       </div>
 
       <div class="input-field">
         <textarea id="comment" class="materialize-textarea">${
-        doc.data().comment
+          doc.data().comment
         }</textarea>
 
     </div>
@@ -392,8 +391,12 @@ const deleteS = (id) => {
           .doc(id)
           .update(formData)
           .then(() => {
-            alert("Data Updated");
-            window.location = "Software.html";
+            document.querySelector(".editMsg").innerHTML =
+              '<h5 class="card-panel white-text green darken-1 center-align">Data Upaded!</h5>';
+
+            setTimeout(() => {
+              window.location = "Software.html";
+            }, 1500);
           })
           .catch((err) => {
             console.log(err.message);
@@ -412,7 +415,10 @@ const deleteM = (id) => {
     .doc(id)
     .get()
     .then((doc) => {
-      editM.innerHTML = `<div class="modal-content">
+      editM.innerHTML = `
+      <div class = "editMsg1" ></div>
+   
+      <div class="modal-content">
     <h4>Edit History</h4><br />
     <form id="edit-form2">
         <div class="select">
@@ -438,8 +444,8 @@ const deleteM = (id) => {
   
         <div class="input-field">
             <textarea id="problem" class="materialize-textarea" required>${
-        doc.data().problem
-        }</textarea>
+              doc.data().problem
+            }</textarea>
         </div>
   
         <div class="select">
@@ -451,15 +457,15 @@ const deleteM = (id) => {
   
         <div class="input-field">
             <input style="color: rgb(143, 143, 143);" id="date_in" type="date" value=${
-        doc.data().date_in
-        } required>
+              doc.data().date_in
+            } required>
             <label for="date_in">Date In</label>
         </div>
   
         <div class="input-field">
             <input style="color: rgb(143, 143, 143);" id="date_out" type="date" value=${
-        doc.data().date_out
-        } required>
+              doc.data().date_out
+            } required>
             <label for="date_out">Date Out</label>
         </div>
   
@@ -487,8 +493,12 @@ const deleteM = (id) => {
           .doc(id)
           .update(formData2)
           .then(() => {
-            alert("Data Updated");
-            window.location = "MHistory.html";
+            document.querySelector(".editMsg1").innerHTML =
+              '<h5 class="card-panel white-text green darken-1 center-align">Data Upaded!</h5>';
+
+            setTimeout(() => {
+              window.location = "MHistory.html";
+            }, 1500);
           })
           .catch((err) => {
             console.log(err.message);
@@ -503,7 +513,7 @@ const deleteM = (id) => {
 const mhowDelete = (row, isAdmin) => {
   if (isAdmin) {
     return (
-      "<td> <button onclick=deleteRow('" + row.id + "')>Delete</button></td>"
+      "<td> <button onclick=mdeleteRow('" + row.id + "')>Delete</button></td>"
     );
   } else {
     return ``;
@@ -784,3 +794,29 @@ const setupRM = (user, data) => {
     guideLists.innerHTML = "";
   }
 };
+
+// $("#btn-resetPassword").click(function()
+// {
+//   var auth = firebase.auth();
+//   var email = $("#email").val();
+
+//   if(eamil != "")
+//   {
+//     auth.sendPasswordResetEmail(email).then(function()
+//     {
+//       window.alert("Email has been sent to you, please check.");
+//     }).catch(function(error)
+//     {
+//       var errorCode = error.code;
+//       var errorMessage = error.message;
+
+//       console.log(errorCode);
+//       console.log(errorMessage);
+
+//       window.alert("message : " + errorMessage);
+//     });
+//   }
+//   else{
+//     window.alert("Please write your email first.")
+//   }
+// });

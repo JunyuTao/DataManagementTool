@@ -494,7 +494,7 @@ const deleteM = (id) => {
           .update(formData2)
           .then(() => {
             document.querySelector(".editMsg1").innerHTML =
-              '<h5 class="card-panel white-text green darken-1 center-align">Data Upaded!</h5>';
+              '<h5 class="card-panel white-text green darken-1 center-align">Data Updated!</h5>';
 
             setTimeout(() => {
               window.location = "MHistory.html";

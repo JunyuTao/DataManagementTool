@@ -635,8 +635,6 @@ const setupLname = (user, data) => {
       }
     });
     addLname.innerHTML = html;
-  } else {
-    guideLists.innerHTML = "";
   }
 };
 
@@ -657,9 +655,7 @@ const setupTag = (user, data) => {
       }
     });
     addTag.innerHTML = html;
-  } else {
-    guideLists.innerHTML = "";
-  }
+  } 
 };
 
 const setupLi = (user, data) => {
@@ -679,8 +675,6 @@ const setupLi = (user, data) => {
       }
     });
     addLi.innerHTML = html;
-  } else {
-    guideLists.innerHTML = "";
   }
 };
 
@@ -701,8 +695,6 @@ const setupVS = (user, data) => {
       }
     });
     addVS.innerHTML = html;
-  } else {
-    guideLists.innerHTML = "";
   }
 };
 
@@ -723,8 +715,6 @@ const setupAPR = (user, data) => {
       }
     });
     addAPR.innerHTML = html;
-  } else {
-    guideLists.innerHTML = "";
   }
 };
 
@@ -746,8 +736,6 @@ const setupname = (user, data) => {
       }
     });
     addOwner.innerHTML = htmll;
-  } else {
-    guideLists.innerHTML = "";
   }
 };
 
@@ -768,8 +756,6 @@ const setupLV = (user, data) => {
       }
     });
     addLV.innerHTML = html;
-  } else {
-    guideLists.innerHTML = "";
   }
 };
 
@@ -790,8 +776,6 @@ const setupRM = (user, data) => {
       }
     });
     addRM.innerHTML = html;
-  } else {
-    guideLists.innerHTML = "";
   }
 };
 

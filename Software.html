@@ -38,8 +38,7 @@
                     <a href="#" class="grey-text" id="logoutsidenav" style="font-size: larger">Logout</a>
                 </li>
                 <li class="admin" style="display: none; ">
-                    <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add
-                        Software Package</a>
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add Mechanics & Software Package</a>
                 </li>
                 <li class="admin" style="display: none; ">
                     <a class="grey-text" id="downloadSoftware" style="font-size: larger">Download</a>
@@ -72,8 +71,7 @@
             <a class="grey-text" id="logout" style="font-size: larger">Logout</a>
         </li>
         <li class="admin" style="display: none; ">
-            <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add
-                Software Package</a>
+            <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: larger">Add Mechanics & Software Package</a>
         </li>
         <li class="admin" style="display: none; ">
             <a class="grey-text" id="downloadSoftware" style="font-size: larger">Download</a>
@@ -165,17 +163,18 @@
     <!-- ADD MODAL -->
     <div id="modal-create" class="modal">
         <div class="modal-content">
-            <h4>Add Software Package</h4>
+            <h4>Add Mechanics & Software Package</h4>
             <div>
                 <a href="./doc/G2 Solutions User Manual .pdf#page=10" target="_blank"><button class="btn grey">?</button></a>
             </div><br />
             <form id="create-form">
-
+                <p style="background-color: rgb(103, 187, 235); color:white; font-size: larger; font-weight: bold;">Add New Mechanics or Existing Mechanics...............................................................................</p>
                 <div class="select">
                     <label for="fname">First Name</label>
                     <input list="fname" id="first">
                     <datalist id="fname" class="fname">
                     </datalist>
+                    <p style="color:red; display: none;"id="fnw">Adding new First Name</p>
                 </div>
 
                 <div class="select">
@@ -191,30 +190,30 @@
                     <datalist id="tag_num" class="tag_num">
                     </datalist>
                 </div>
-
+                <p style="background-color: rgb(103, 187, 235); color:white; font-size: larger; font-weight: bold;" >Add New Software or Existing Software.....................................................................................</p>
                 <div class="select">
-                    <label for="software">Software(required)</label>
+                    <label for="software">Software</label>
                     <input list="software" id="sw">
                     <datalist id="software" class="software">
                     </datalist>
                 </div>
 
                 <div class="select">
-                    <label for="license_key">License Key(required)</label>
+                    <label for="license_key">License Key</label>
                     <input list="license_key" id="lk">
                     <datalist id="license_key" class="license_key">
                     </datalist>
                 </div>
 
                 <div class="select">
-                    <label for="version">Version(required)</label>
+                    <label for="version">Version</label>
                     <input list="version" id="vs">
                     <datalist id="version" class="version">
                     </datalist>
                 </div>
 
                 <div class="select">
-                    <label for="apr">APR(required)</label>
+                    <label for="apr">APR</label>
                     <input list="apr" id="a">
                     <datalist id="apr" class="apr">
                     </datalist>
@@ -222,7 +221,7 @@
 
                 <div class="input-field">
                     <input style="color: rgb(143, 143, 143);" id="exp_date" type="date">
-                    <label for="exp_date">Expiration Date(required)</label>
+                    <label for="exp_date">Expiration Date</label>
                 </div>
 
                 <div class="input-field">
@@ -253,7 +252,7 @@
 
 
     <!-- LIST -->
-    <div class="container" style="margin-top: 20px; width: 120%; height: 50%;">
+    <div class="container" style="margin-top: 140px; width: 120%; height: 50%;">
         <div style="margin: 50px; margin-top: 15px;">
             <a class="logged-in" style="margin-right: 75px;position: absolute; right: 0;" href="./doc/G2 Solutions User Manual .pdf#page=9" target="_blank"><button class="btn grey">?</button></a>
         <ul class="collapsible z-depth-0 guidess" id="guidess" style="border: none;">

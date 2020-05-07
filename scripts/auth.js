@@ -174,19 +174,26 @@ createForm.addEventListener("submit", (e) => {
       comment: createForm.comment.value,
     };
     
-    if (
-      !formData.software ||
-      !formData.license_key ||
-      !formData.version ||
-      !formData.apr ||
-      !formData.exp_date
-    ) {
-      addmsg.innerHTML =
-        '<h5 class="card-panel black-text red center-align"> Kindly Enter Fields First</h5>';
-      setTimeout(() => {
-        addmsg.innerHTML = "";
-      }, 2100);
+    // if (
+    //   !formData.software ||
+    //   !formData.license_key ||
+    //   !formData.version ||
+    //   !formData.apr ||
+    //   !formData.exp_date
+    // ) {
+    //   addmsg.innerHTML =
+    //     '<h5 class="card-panel black-text red center-align"> Kindly Enter Fields First</h5>';
+    //   setTimeout(() => {
+    //     addmsg.innerHTML = "";
+    //   }, 2100);
+    // } else {
+      let exprdate = formData.exp_date.split("-");
+      let formdate = new Date(+exprdate[0], +exprdate[1] - 1, +exprdate[2]);
+    if (numDays(formdate, new Date()) < 0)
+    {
+      window.alert('Please enter the right date.');
     } else {
+
       db.collection("guides")
         .add(formData)
         .then(() => {
@@ -198,7 +205,8 @@ createForm.addEventListener("submit", (e) => {
         .catch((err) => {
           console.log(err.message);
         });
-    }
+      }
+    // }
 
   }
 });

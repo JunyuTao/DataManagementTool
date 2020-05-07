@@ -15,6 +15,7 @@ const addAPR = document.querySelector(".apr");
 const addOwner = document.querySelector(".owner");
 const addLV = document.querySelector(".laptop_v");
 const addRM = document.querySelector(".repairman");
+const fn = document.getElementById("fnw");
 
 const setupUI = (user) => {
   if (user) {
@@ -105,6 +106,45 @@ const setupGuides = (user, data) => {
         data = `${counter}/${groupedGuides[software].length}`;
       }
 
+      if(software == ""){
+
+        const li = `
+      <li style="position: absolute;top: 100px;">
+      <div style= "background: rgb(1, 119, 187) !important; color: white;" class="collapsible-header grey lighten-4"><div><p style="font-size:larger;" >Mechanics with no Software Assigned</div></div>
+      <div class="collapsible-body white">
+        <table id="${software.replace(/ /g, "")}">
+        <input type="text" id="search${software.replace(
+          / /g,
+          "",
+        )}" onkeyup="search(${software.replace(
+        / /g,
+        "",
+      )})" placeholder="Search" title="Type in a name">
+     
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>License Key</th>
+            <th>Version</th>
+            <th>Tag#</th>
+            <th>APR</th>
+            <th>Expiration Date</th>
+            <th>Comment</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          ${getTable(user.admin, groupedGuides[software])}
+          </tbody>
+        </table>
+      </div>
+    </li>
+      `;
+      tableHtml += li;
+      }
+      else{
+
       const li = `
       <li>
       <div ${style} class="collapsible-header grey lighten-4"><div>${software}</div><div class="adminStats" style="margin-left:auto;">${data}</div> </div>
@@ -139,6 +179,7 @@ const setupGuides = (user, data) => {
     </li>
       `;
       tableHtml += li;
+        }
     });
     guideLists.innerHTML = tableHtml;
     //guideList.innerHTML = html;
@@ -207,6 +248,11 @@ const setupMaintenance = (user, data) => {
 const numDaysBetween = (d1, d2) => {
   let diff = Math.abs(d1.getTime() - d2.getTime());
   return Math.floor(diff / (1000 * 60 * 60 * 24));
+};
+
+const numDays = (d1, d2) => {
+  let dif = d1.getTime() - d2.getTime();
+  return Math.floor(dif / (1000 * 60 * 60 * 24));
 };
 
 const getTable = (isAdmin, rows) => {
@@ -301,6 +347,7 @@ const deleteS = (id) => {
   <div class="modal-content">
   <h4>Edit Data</h4><br />
   <form id="edit-form1">
+    <p style="background-color: rgb(103, 187, 235); color:white; font-size: larger; font-weight: bold;">Add New Mechanics or Existing Mechanics...............................................................................</p>
 
       <div class="select">
           <label for="fname">First Name</label>
@@ -322,6 +369,7 @@ const deleteS = (id) => {
           <datalist id="tag_num" class="tag_num">
   </datalist>
       </div>
+      <p style="background-color: rgb(103, 187, 235); color:white; font-size: larger; font-weight: bold;" >Add New Software or Existing Software.....................................................................................</p>
 
       <div class="select">
           <label for="software">Software</label>
@@ -365,7 +413,7 @@ const deleteS = (id) => {
 
     </div>
 
-      <button class="btn yellow darken-2 z-depth-0">Edit</button>
+      <button class="btn yellow darken-2 z-depth-0">Save</button>
   </form>
 </div>
 `;
@@ -387,6 +435,12 @@ const deleteS = (id) => {
           comment: editForm1.comment.value,
         };
 
+        let exprdate = formData.exp_date.split("-");
+        let formdate = new Date(+exprdate[0], +exprdate[1] - 1, +exprdate[2]);
+        if (numDays(formdate, new Date()) < 0)
+        {
+          window.alert('Please enter the right date.');
+        } else {
         db.collection("guides")
           .doc(id)
           .update(formData)
@@ -401,6 +455,7 @@ const deleteS = (id) => {
           .catch((err) => {
             console.log(err.message);
           });
+        }
       });
     })
     .catch((err) => {
@@ -469,7 +524,7 @@ const deleteM = (id) => {
             <label for="date_out">Date Out</label>
         </div>
   
-        <button class="btn yellow darken-2 z-depth-0">Edit</button>
+        <button class="btn yellow darken-2 z-depth-0">Save</button>
     </form>
   </div>
 `;
@@ -616,6 +671,11 @@ const setupFname = (user, data) => {
     });
     addFname.innerHTML = htmll;
   }
+  // if(addFname.value == null){
+  //   fn.forEach((item) => (item.style.display = "none"));
+  // }else{
+  //   fn.forEach((item) => (item.style.display = "none"));
+  // }
 };
 
 const setupLname = (user, data) => {
@@ -804,3 +864,20 @@ const setupRM = (user, data) => {
 //     window.alert("Please write your email first.")
 //   }
 // });
+
+
+const Checkname = (user, data) => {
+  console.log(user);
+  console.log(data);
+  if (data.length) {
+    var DataArray = [];
+    data.forEach((doc) => {
+      const Guidessss = { id: doc.id, ...doc.data() };
+      if (DataArray.includes(Guidessss.fname && Guidessss.lname)) {
+        
+        window.alert("Just added a new mechanic!")
+        
+      }
+    });
+  }
+};

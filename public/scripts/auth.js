@@ -246,14 +246,14 @@ const logout = document.querySelector("#logout");
 logout.addEventListener("click", (e) => {
   e.preventDefault();
   auth.signOut();
-  window.location.href = "Software.html";
+  window.location.href = "index.html";
 });
 // sidenav logout
 const sidenavlogout = document.querySelector("#logoutsidenav");
 sidenavlogout.addEventListener("click", (e) => {
   e.preventDefault();
   auth.signOut();
-  window.location.href = "Software.html";
+  window.location.href = "index.html";
 });
 
 // login

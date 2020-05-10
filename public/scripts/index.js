@@ -109,8 +109,8 @@ const setupGuides = (user, data) => {
       if(software == ""){
 
         const li = `
-      <li style="position: absolute;top: 100px;">
-      <div style= "background: rgb(1, 119, 187) !important; color: white;" class="collapsible-header grey lighten-4"><div><p style="font-size:larger;" >Mechanics with no Software Assigned</div></div>
+      <li style="position: absolute;top: 70px; height:10px;">
+      <div style= "background: rgb(1, 119, 187) !important; color: white;" class="collapsible-header grey lighten-4">Mechanics with no Software Assigned</div>
       <div class="collapsible-body white">
         <table id="${software.replace(/ /g, "")}">
         <input type="text" id="search${software.replace(
@@ -144,10 +144,9 @@ const setupGuides = (user, data) => {
       tableHtml += li;
       }
       else{
-
       const li = `
       <li>
-      <div ${style} class="collapsible-header grey lighten-4"><div>${software}</div><div class="adminStats" style="margin-left:auto;">${data}</div> </div>
+      <div ${style} class="collapsible-header grey lighten-4"><div>${software}</div><div class="adminStats" style="margin-left:auto;">${data}</div></div>
       <div class="collapsible-body white">
         <table id="${software.replace(/ /g, "")}">
         <input type="text" id="search${software.replace(
@@ -449,7 +448,7 @@ const deleteS = (id) => {
               '<h5 class="card-panel white-text green darken-1 center-align">Data Upaded!</h5>';
 
             setTimeout(() => {
-              window.location = "Software.html";
+              window.location = "index.html";
             }, 1500);
           })
           .catch((err) => {

@@ -445,7 +445,7 @@ const deleteS = (id) => {
           .update(formData)
           .then(() => {
             document.querySelector(".editMsg").innerHTML =
-              '<h5 class="card-panel white-text green darken-1 center-align">Data Upaded!</h5>';
+              '<h5 class="card-panel white-text green darken-1 center-align">Data Updated!</h5>';
 
             setTimeout(() => {
               window.location = "index.html";
